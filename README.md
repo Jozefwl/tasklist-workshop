@@ -17,7 +17,6 @@ A Spring Boot-based REST API for managing tasks and tasklists with secure authen
 - Spring Security implementation
 - User-based authorization (users can only access their own tasks/tasklists)
 - Comprehensive error handling
-- Health check endpoint
 
 ## Tech Stack
 
@@ -238,7 +237,7 @@ Delete a task by ID.
 
 ## Authorization & Security
 
-- All endpoints except `/auth/register`, `/auth/login`, and `/healthCheck` require JWT authentication
+- All endpoints except `/auth/register`, `/auth/login` require JWT authentication
 - Users can only access their own tasks and tasklists
 - The application validates ownership for all CRUD operations
 - JWT tokens are extracted from the `Authorization: Bearer <token>` header
