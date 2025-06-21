@@ -2,7 +2,9 @@ package com.waldhauser.tasklist.rest.controller;
 
 import com.waldhauser.tasklist.domain.model.User;
 import com.waldhauser.tasklist.rest.model.user.LoginResponse;
+import com.waldhauser.tasklist.rest.model.user.UserRequest;
 import com.waldhauser.tasklist.service.api.UserService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,12 +21,12 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public User register(@RequestBody User user) {
+    public User register(@Valid @RequestBody UserRequest user) {
         return userService.register(user.getName(), user.getPassword());
     }
 
     @PostMapping("/login")
-    public LoginResponse login(@RequestBody User user) {
+    public LoginResponse login(@Valid @RequestBody UserRequest user) {
         return userService.login(user.getName(), user.getPassword());
     }
 
