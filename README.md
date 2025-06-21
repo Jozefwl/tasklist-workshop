@@ -30,6 +30,8 @@ A Spring Boot-based REST API for managing tasks and tasklists with secure authen
 
 ## API Endpoints
 
+API description is available here: http://localhost:8080/swagger-ui/index.html#/
+
 ### Authentication
 
 #### `POST /auth/register`
