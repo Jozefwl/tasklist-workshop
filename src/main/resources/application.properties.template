@@ -1,0 +1,24 @@
+spring.application.name=tasklist
+
+# logging
+#logging.level.org.springframework.security=DEBUG
+#logging.level.com.waldhauser.tasklist.security=DEBUG
+#logging.level.io.jsonwebtoken=DEBUG
+
+# postgres settings
+spring.datasource.url=jdbc:postgresql://XXXX:XXX/tasklist
+spring.datasource.username=XXX
+spring.datasource.password=XXX
+spring.datasource.driver-class-name=org.postgresql.Driver
+# plaintext only for development
+
+# jpa properties
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.hibernate.ddl-auto=update
+# show sql queries to console
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+# JWT Properties (change secret for prod, must be >= 32chars)
+app.jwt-secret=XXX32charsXXX32charsXXX32chars
+app.jwt-expiration-milliseconds=3600000
