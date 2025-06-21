@@ -59,8 +59,6 @@ public class TaskController {
 
     @PostMapping("/create")
     public TaskResponse createTask(@Valid @RequestBody TaskCreateRequest request) {
-        String userIdString = SecurityContextHolder.getContext().getAuthentication().getName();
-
         // service will handle tasklist validation, so pass the tasklistId
         return taskService.create(request, request.getTasklistId());
     }

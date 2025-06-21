@@ -10,8 +10,6 @@ public class TaskCreateRequest {
 
     @NotNull(message = "Tasklist ID cannot be null")
     private UUID tasklistId;
-    @NotNull(message = "Owner ID cannot be null")
-    private UUID ownerId;
     @NotNull(message = "Name cannot be null")
     @Length(min = 5, max = 255, message = "Name must be between 5 and 255 characters")
     private String name;
@@ -25,14 +23,6 @@ public class TaskCreateRequest {
 
     public void setTasklistId(UUID tasklistId) {
         this.tasklistId = tasklistId;
-    }
-
-    public UUID getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(UUID ownerId) {
-        this.ownerId = ownerId;
     }
 
     public String getName() {
