@@ -1,7 +1,5 @@
 package com.waldhauser.tasklist.rest.controller;
 
-import com.waldhauser.tasklist.domain.model.Task;
-import com.waldhauser.tasklist.domain.repository.TasklistRepository;
 import com.waldhauser.tasklist.rest.model.task.TaskCreateRequest;
 import com.waldhauser.tasklist.rest.model.task.TaskResponse;
 import com.waldhauser.tasklist.rest.model.task.TaskUpdateRequest;
@@ -33,11 +31,9 @@ import java.util.UUID;
 public class TaskController {
 
     private final TaskService taskService;
-    private final TasklistRepository tasklistRepository;
 
     public TaskController(TaskService taskService) {
         this.taskService = taskService;
-        this.tasklistRepository = tasklistRepository;
     }
 
     /**
@@ -117,20 +113,21 @@ public class TaskController {
     }
 
     /**
-     * Updates an existing task based on the details provided in the request.
-     * The details include properties such as task ID and fields to update.
-     * This method delegates the update operation to the task service.
+     * Updates an existing task with the provided details.
+     * Delegates the update operation to the task service.
      *
-     * @param task the {@code TaskUpdateRequest} object containing the updated task details
-     * @return the updated {@code Task} object after the update operation is completed
+     * @param task the {@code TaskUpdateRequest} object containing updated details for the task
+     *             such as name, description, due date, and other attributes to be modified
+     * @return the updated {@code TaskResponse} object containing the details of the task after the update
+     * @throws IllegalAccessException if the user is not authorized to update the task
      */
     @Operation(summary = "Update an existing task based on the details provided in the request.")
     @ApiResponse(responseCode = "200", description = "Task updated successfully")
     @PostMapping("/update")
-    public Task updateTask(@Valid @io.swagger.v3.oas.annotations.parameters.RequestBody(
+    public TaskResponse updateTask(@Valid @io.swagger.v3.oas.annotations.parameters.RequestBody(
             description = "Task request to be upodated", required = true,
             content = @Content(mediaType = "application/json",
-                    schema = @Schema(implementation = TaskCreateRequest.class))) @RequestBody TaskUpdateRequest task) {
+                    schema = @Schema(implementation = TaskCreateRequest.class))) @RequestBody TaskUpdateRequest task) throws IllegalAccessException {
         return taskService.update(task);
     }
 
