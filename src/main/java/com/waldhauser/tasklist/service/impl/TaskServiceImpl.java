@@ -1,4 +1,4 @@
-package com.waldhauser.tasklist.service.impl;
+package com.waldhauser.tasklist.task;
 
 import com.waldhauser.tasklist.domain.model.Task;
 import com.waldhauser.tasklist.domain.repository.TaskRepository;
