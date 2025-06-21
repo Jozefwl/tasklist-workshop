@@ -20,11 +20,9 @@ import java.util.UUID;
 public class TaskController {
 
     private final TaskService taskService;
-    private final TasklistRepository tasklistRepository;
 
-    public TaskController(TaskService taskService, TasklistRepository tasklistRepository) {
+    public TaskController(TaskService taskService) {
         this.taskService = taskService;
-        this.tasklistRepository = tasklistRepository;
     }
 
 
@@ -68,7 +66,7 @@ public class TaskController {
     }
 
     @PostMapping("/update")
-    public Task updateTask(@Valid @RequestBody TaskUpdateRequest task) {
+    public TaskResponse updateTask(@Valid @RequestBody TaskUpdateRequest task) throws IllegalAccessException {
         return taskService.update(task);
     }
 

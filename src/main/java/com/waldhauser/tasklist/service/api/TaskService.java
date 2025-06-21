@@ -17,7 +17,7 @@ public interface TaskService {
 
     TaskResponse create(TaskCreateRequest request, UUID tasklistId);
 
-    Task update(TaskUpdateRequest updatedTask);
+    TaskResponse update(TaskUpdateRequest updatedTask) throws IllegalAccessException;
 
     void delete(UUID taskId) throws IllegalAccessException;
 

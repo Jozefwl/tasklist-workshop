@@ -83,12 +83,34 @@ public class TaskServiceImpl implements TaskService {
     }
 
     // ---------- UPDATE ----------
-    public Task update(TaskUpdateRequest updatedTask) {
+    public TaskResponse update(TaskUpdateRequest updatedTask) throws IllegalAccessException {
+        String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+
         Task task = taskRepository.findById(updatedTask.getId())
                 .orElseThrow(() -> new EntityNotFoundException("Task not found"));
-        if(updatedTask.getName() != null) {task.setName(updatedTask.getName());}
-        if(updatedTask.getDescription() != null) {task.setDescription(updatedTask.getDescription());}
-        return taskRepository.save(task);
+
+        // check owner
+        if(!task.getOwnerId().equals(UUID.fromString(userId))) {
+            throw new IllegalAccessException("You aren't allowed to update this task");
+        }
+
+        if(updatedTask.getName() != null) {
+            task.setName(updatedTask.getName());
+        }
+        if(updatedTask.getDescription() != null) {
+            task.setDescription(updatedTask.getDescription());
+        }
+
+        Task savedTask = taskRepository.save(task);
+
+        // Return TaskResponse to avoid circular reference
+        return new TaskResponse(
+                savedTask.getId(),
+                savedTask.getOwnerId(),
+                savedTask.getName(), // This maps to 'title' in TaskResponse
+                savedTask.getDescription(),
+                savedTask.getTasklist().getId()
+        );
     }
 
     // ---------- DELETE ----------
